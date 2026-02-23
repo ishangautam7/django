@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Task
+from .forms import TaskForm
 
 
 def home(request):
-    """Home page view - demonstrates HttpRequest and HttpResponse"""
-    return render(request, 'tasks/home.html')
+    """Home page view - demonstrates sessions (visit counter)"""
+    # Session: track visit count
+    visit_count = request.session.get('visit_count', 0)
+    visit_count += 1
+    request.session['visit_count'] = visit_count
+
+    return render(request, 'tasks/home.html', {'visit_count': visit_count})
 
 
 def about(request):
@@ -13,7 +19,14 @@ def about(request):
     return render(request, 'tasks/about.html')
 
 
-# ---- CRUD Operations ----
+def toggle_theme(request):
+    """Toggle theme between light and dark - demonstrates session usage"""
+    current_theme = request.session.get('theme', 'light')
+    request.session['theme'] = 'dark' if current_theme == 'light' else 'light'
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+# ---- CRUD Operations using Django Forms ----
 
 def task_list(request):
     """READ - List all tasks"""
@@ -22,25 +35,28 @@ def task_list(request):
 
 
 def task_create(request):
-    """CREATE - Add a new task"""
+    """CREATE - Add a new task using Django ModelForm"""
     if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description', '')
-        Task.objects.create(title=title, description=description)
-        return redirect('task_list')
-    return render(request, 'tasks/task_create.html')
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('task_list')
+    else:
+        form = TaskForm()
+    return render(request, 'tasks/task_create.html', {'form': form})
 
 
 def task_update(request, pk):
-    """UPDATE - Edit an existing task"""
+    """UPDATE - Edit an existing task using Django ModelForm"""
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':
-        task.title = request.POST.get('title')
-        task.description = request.POST.get('description', '')
-        task.completed = request.POST.get('completed') == 'on'
-        task.save()
-        return redirect('task_list')
-    return render(request, 'tasks/task_update.html', {'task': task})
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task_list')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'tasks/task_update.html', {'form': form, 'task': task})
 
 
 def task_delete(request, pk):
