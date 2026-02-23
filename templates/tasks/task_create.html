@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Task{% endblock %}
+
+{% block content %}
+<h1>Create New Task</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <label for="title">Title:</label><br>
+        <input type="text" name="title" id="title" required style="width:100%; padding:8px; margin-top:5px;">
+    </p>
+    <p>
+        <label for="description">Description:</label><br>
+        <textarea name="description" id="description" rows="4"
+            style="width:100%; padding:8px; margin-top:5px;"></textarea>
+    </p>
+    <button type="submit" class="btn">Create Task</button>
+    <a href="{% url 'task_list' %}" style="margin-left:10px;">Cancel</a>
+</form>
+{% endblock %}

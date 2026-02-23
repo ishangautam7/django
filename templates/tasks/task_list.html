@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Tasks - Task Manager{% endblock %}
+
+{% block content %}
+<h1>My Tasks</h1>
+<a href="{% url 'task_create' %}" class="btn">+ Add New Task</a>
+<br><br>
+
+{% if tasks %}
+<table width="100%" cellpadding="10" cellspacing="0" border="1" style="border-collapse: collapse;">
+    <thead style="background-color: #333; color: white;">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description|truncatewords:10 }}</td>
+            <td>{% if task.completed %}Done{% else %}Pending{% endif %}</td>
+            <td>{{ task.created_at|date:"M d, Y" }}</td>
+            <td>
+                <a href="{% url 'task_update' task.pk %}" class="btn">Edit</a>
+                <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No tasks yet. Create one!</p>
+{% endif %}
+{% endblock %}
