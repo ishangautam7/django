@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Error - Task Manager{% endblock %}
+
+{% block content %}
+<h1 style="color: #dc3545;">Oops! Something went wrong.</h1>
+<p>There was an unexpected error processing your request.</p>
+
+<div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; border: 1px solid #f5c6cb;">
+    <strong>Error Details:</strong><br>
+    {{ error }}
+</div>
+
+<p style="margin-top: 20px;">
+    <a href="{% url 'home' %}" class="btn">Back to Home</a>
+</p>
+{% endblock %}
