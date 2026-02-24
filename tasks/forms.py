@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Task
 
 
@@ -20,3 +22,16 @@ class TaskForm(forms.ModelForm):
             }),
             'completed': forms.CheckboxInput(),
         }
+
+
+class RegisterForm(UserCreationForm):
+    """User registration form extending Django's built-in UserCreationForm"""
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
+        'style': 'width:100%; padding:8px;',
+        'placeholder': 'Enter email'
+    }))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+

@@ -11,23 +11,33 @@
             margin: 0;
             padding: 0;
 
-                {
+            background-color: {
                 % if request.session.theme=='dark' %
             }
 
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-
-                {
+            #1a1a1a {
                 % else %
             }
 
-            background-color: #f4f4f4;
-            color: #333;
-
-                {
+            #f4f4f4 {
                 % endif %
             }
+
+            ;
+
+            color: {
+                % if request.session.theme=='dark' %
+            }
+
+            #e0e0e0 {
+                % else %
+            }
+
+            #333 {
+                % endif %
+            }
+
+            ;
         }
 
         nav {
@@ -53,22 +63,19 @@
             margin: 30px auto;
             padding: 20px;
 
-                {
+            background: {
                 % if request.session.theme=='dark' %
             }
 
-            background: #2d2d2d;
-
-                {
+            #2d2d2d {
                 % else %
             }
 
-            background: white;
-
-                {
+            white {
                 % endif %
             }
 
+            ;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -129,6 +136,12 @@
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'task_list' %}">Tasks</a>
             <a href="{% url 'about' %}">About</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            {% endif %}
         </div>
         <a href="{% url 'toggle_theme' %}" class="theme-toggle">
             {% if request.session.theme == 'dark' %}☀️ Light{% else %}🌙 Dark{% endif %}
