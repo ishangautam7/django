@@ -3,19 +3,21 @@
 {% block title %}Home - Task Manager{% endblock %}
 
 {% block content %}
-<h1>Welcome to Task Manager</h1>
-<p>This is a Django web application demonstrating core web development concepts.</p>
+<div style="text-align: center; padding: 40px 20px;">
+    <h1>Welcome to Task Manager</h1>
+    <p style="font-size: 1.2em; color: gray;">A simple and efficient way to manage your tasks.</p>
+    
+    <div style="margin: 30px auto; padding: 15px; border: 1px solid #ddd; border-radius: 8px; max-width: 400px; text-align: left;">
+        <p style="margin: 0;"><strong>Active Session:</strong> You have visited this dashboard <strong>{{ visit_count }}</strong> time{{ visit_count|pluralize }}.</p>
+    </div>
 
-<p><strong>Session Visit Count:</strong> You have visited this page <strong>{{ visit_count }}</strong> time{{
-    visit_count|pluralize }}.</p>
-
-<h2>Concepts Covered:</h2>
-<ul>
-    <li>Request &amp; Response Handling</li>
-    <li>Form Data Handling &amp; Sessions</li>
-    <li>Routing, Middleware, Templating</li>
-    <li>Database Integration with ORM (CRUD)</li>
-    <li>Authentication &amp; Authorization</li>
-    <li>Custom Middleware</li>
-</ul>
+    <div style="margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <h2 style="border-bottom: 1px solid #ddd; padding-bottom: 10px;">Features</h2>
+        <ul style="line-height: 1.6;">
+            <li>Organize your tasks effortlessly.</li>
+            <li>Secure user authentication.</li>
+            <li>Track your progress effectively.</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

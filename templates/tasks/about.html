@@ -3,21 +3,22 @@
 {% block title %}About - Task Manager{% endblock %}
 
 {% block content %}
-<h1>About This Project</h1>
-<p>This Task Manager application is built using Django framework following the MVT (Model-View-Template) architecture.
-</p>
+<div style="padding: 20px; background: var(--card-bg, #ffffff); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h1 style="color: var(--primary-color, #333);">About Task Manager</h1>
+    <p style="font-size: 1.1em; line-height: 1.6;">
+        Welcome to Task Manager, the premier solution for organizing your daily activities, boosting productivity, and ensuring you never miss a deadline. 
+    </p>
 
-<h2>MVT Architecture:</h2>
-<ul>
-    <li><strong>Model:</strong> Defines the data structure (Task model with fields)</li>
-    <li><strong>View:</strong> Handles business logic and processes requests</li>
-    <li><strong>Template:</strong> Renders the HTML pages for the user</li>
-</ul>
+    <h2 style="color: var(--secondary-color, #555); margin-top: 20px;">Our Mission</h2>
+    <p style="line-height: 1.6;">
+        To provide a streamlined, intuitive, and powerful tool for individuals and teams to track tasks, collaborate, and achieve their goals efficiently.
+    </p>
 
-<h2>Technologies Used:</h2>
-<ul>
-    <li>Python &amp; Django</li>
-    <li>SQLite Database</li>
-    <li>HTML/CSS Templates</li>
-</ul>
+    <h2 style="color: var(--secondary-color, #555); margin-top: 20px;">Features</h2>
+    <ul style="line-height: 1.6;">
+        <li><strong>Secure Organization:</strong> Your data is protected with industry-standard security.</li>
+        <li><strong>Real-time Tracking:</strong> Keep track of your tasks as they progress.</li>
+        <li><strong>Intuitive Interface:</strong> Designed for ease of use without a learning curve.</li>
+    </ul>
+</div>
 {% endblock %}
